@@ -1,33 +1,15 @@
-let menuListSub = document.getElementsByClassName('menu__link');
-let allA = Array.from(menuListSub);
-let sumMenuList = Array.from(menuListSub).length;
-let companyMenu;
-let consultantMenu;
+let menuListSub = Array.from(document.getElementsByClassName('menu__link'));
 
-for (let i = 0; i < sumMenuList; i++) {
-    if (menuListSub.item(i).closest('li').querySelector('ul')) {
-        switch (menuListSub.item(i).textContent) {
-            case "О компании":
-                companyMenu = menuListSub.item(i).closest('li').querySelector('ul');
-                menuListSub.item(i).onclick = showMenuCompany;
-                break;
-
-            case "Услуги":
-                consultantMenu = menuListSub.item(i).closest('li').querySelector('ul');
-                menuListSub.item(i).onclick = showMenuConsult;
-                break;
-        }
+for (let i = 0; i < menuListSub.length; i++) {
+    if (menuListSub[i].closest('li').querySelector('ul')) {
+        let element = menuListSub[i].closest('li').querySelector('a');
+        console.log(element);
+        element.addEventListener('click', showSubMenu);
     }
 }
 
-function showMenuCompany() {
-    debugger;
-    companyMenu.className = "menu menu_sub menu_active";
-    return false
-}
-
-function showMenuConsult() {
-    debugger;
-    consultantMenu.className = "menu menu_sub menu_active";
-    return false;
+function showSubMenu(e) {
+    e.preventDefault();
+    console.log(this.closest('li').querySelector('ul'));
+    this.closest('li').querySelector('ul').classList.toggle("menu_active");
 }
